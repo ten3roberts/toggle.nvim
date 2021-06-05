@@ -5,8 +5,9 @@ Quickly toggle between different sets of values.
 ## Features
 
 - Customizable sets
-- Seek to closest set, like <C-a> and <C-x>
+- Seek to closest set, like `<C-a>` and `<C-x>`
 - Automatic generation of different casings
+- Fast lookup using lua tables
 
 ## Installation
 ### [packer](https://github.com/wbthomason/packer.nvim)

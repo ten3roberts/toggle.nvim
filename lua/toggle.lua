@@ -8,23 +8,25 @@ local defaults = {
   variants = true
 }
 
-local M = {}
-
-function M.setup(config)
-  config = config or {}
-  config = vim.tbl_deep_extend("force", defaults, config)
-  M.sets = M.generate_sets(config)
-  M.search_str = M.generate_search_str(M.sets)
-
-  vim.cmd(vim.api.nvim_replace_termcodes("silent! command Toggle :lua require'toggle'.toggle()", true, true, true))
+-- Convert to title case
+local function title(str)
+  return (str:gsub("^%l", string.upper))
 end
 
-function M.generate_sets(config)
+-- Insert Title, UPPER, lower and original
+local function insert_with_variants(t, a, b)
+  t[a] = b
+  t[title(a)] = title(b)
+  t[a:lower()] = b:lower()
+  t[a:upper()] = b:upper()
+end
+
+local function generate_sets(config)
   local t = {}
 
   local insert = function(t, a, b) t[a] = b end
   if config.variants then
-    insert = M.insert_with_variants
+    insert = insert_with_variants
   end
   for _,v in ipairs(config) do
     insert(t, v[1], v[2])
@@ -34,21 +36,8 @@ function M.generate_sets(config)
   return t
 end
 
--- Convert to title case
-function M.title(str)
-  return (str:gsub("^%l", string.upper))
-end
-
--- Insert Title, UPPER, lower and original
-function M.insert_with_variants(t, a, b)
-  t[a] = b
-  t[M.title(a)] = M.title(b)
-  t[a:lower()] = b:lower()
-  t[a:upper()] = b:upper()
-end
-
 -- Generate the search string to jump to nearest set
-function M.generate_search_str(sets)
+local function generate_search_str(sets)
   -- Concat a search string
   local t = {}
   for k,_ in pairs(sets) do
@@ -56,6 +45,17 @@ function M.generate_search_str(sets)
   end
 
   return '\\<\\('.. table.concat(t, '\\|') ..  '\\)\\>'
+end
+
+local M = {}
+
+function M.setup(config)
+  config = config or {}
+  config = vim.tbl_deep_extend("force", defaults, config)
+  M.sets = generate_sets(config)
+  M.search_str = generate_search_str(M.sets)
+
+  vim.cmd(vim.api.nvim_replace_termcodes("silent! command Toggle :lua require'toggle'.toggle()", true, true, true))
 end
 
 -- Toggles the values

@@ -2,6 +2,16 @@
 
 Quickly toggle between different sets of values.
 
+```lua
+  false <=> true
+  False <=> True
+  ON <=> OFF
+  Auto <=> Manual
+
+  ...etc
+```
+
+
 ## Features
 
 - Customizable sets
@@ -53,10 +63,10 @@ nmap gb <cmd>lua require'toggle'.toggle()<CR>
 
 Configuration is done by passing a table to setup. Variants for `Title`, `UPPER`, and `lower` case will automatically be generated if `variants == true`
 
-Default configuration:
+Default setup:
 
 ```lua
-{
+require 'toggle'.setup {
   { 'true', 'false' },
   { 'on', 'off' },
   { 'enable', 'disable' },

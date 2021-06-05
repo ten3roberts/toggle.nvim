@@ -6,7 +6,7 @@ Quickly toggle between different sets of values.
 
 - Customizable sets
 - Seek to closest set, like `<C-a>` and `<C-x>`
-- Automatic generation of different casings
+- Automatic generation of different casing variants
 - Fast lookup using lua tables
 
 ## Installation
@@ -43,9 +43,9 @@ or
 require'toggle'.toggle()
 ```
 
-or setup keymapping
+or using keymapping `gb`
 
-```
+```vim
 nmap gb <cmd>lua require'toggle'.toggle()<CR>
 ```
 

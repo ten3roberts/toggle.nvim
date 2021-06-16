@@ -57,12 +57,14 @@ Default configuration:
 
 ```lua
 {
-  { 'true', 'false' },
-  { 'on', 'off' },
-  { 'enable', 'disable' },
-  { 'enabled', 'disabled' },
-  { 'manual', 'auto' },
-  { 'always', 'never' },
+  sets = {
+    { 'true', 'false' },
+    { 'on', 'off' },
+    { 'enable', 'disable' },
+    { 'enabled', 'disabled' },
+    { 'manual', 'auto' },
+    { 'always', 'never' },
+  },
   variants = true
 }
 ```

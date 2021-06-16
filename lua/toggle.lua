@@ -1,10 +1,12 @@
 local defaults = {
-  { 'true', 'false' },
-  { 'on', 'off' },
-  { 'enable', 'disable' },
-  { 'enabled', 'disabled' },
-  { 'manual', 'auto' },
-  { 'always', 'never' },
+  sets = {
+    { 'true', 'false' },
+    { 'on', 'off' },
+    { 'enable', 'disable' },
+    { 'enabled', 'disabled' },
+    { 'manual', 'auto' },
+    { 'always', 'never' },
+  },
   variants = true
 }
 
@@ -28,7 +30,7 @@ local function generate_sets(config)
   if config.variants then
     insert = insert_with_variants
   end
-  for _,v in ipairs(config) do
+  for _,v in ipairs(config.sets) do
     insert(t, v[1], v[2])
     insert(t, v[2], v[1])
   end
@@ -51,7 +53,7 @@ local M = {}
 
 function M.setup(config)
   config = config or {}
-  config = vim.tbl_deep_extend("force", defaults, config)
+  config = vim.tbl_extend("force", defaults, config)
   M.sets = generate_sets(config)
   M.search_str = generate_search_str(M.sets)
 

@@ -12,6 +12,7 @@ local defaults = {
 
 -- Convert to title case
 local function title(str)
+  str = str:lower()
   return (str:gsub("^%l", string.upper))
 end
 

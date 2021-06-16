@@ -2,11 +2,21 @@
 
 Quickly toggle between different sets of values.
 
+```lua
+  false <=> true
+  False <=> True
+  ON <=> OFF
+  Auto <=> Manual
+
+  ...etc
+```
+
+
 ## Features
 
 - Customizable sets
 - Seek to closest set, like `<C-a>` and `<C-x>`
-- Automatic generation of different casings
+- Automatic generation of different casing variants
 - Fast lookup using lua tables
 
 ## Installation
@@ -43,9 +53,9 @@ or
 require'toggle'.toggle()
 ```
 
-or setup keymapping
+or using keymapping `gb`
 
-```
+```vim
 nmap gb <cmd>lua require'toggle'.toggle()<CR>
 ```
 
@@ -53,7 +63,7 @@ nmap gb <cmd>lua require'toggle'.toggle()<CR>
 
 Configuration is done by passing a table to setup. Variants for `Title`, `UPPER`, and `lower` case will automatically be generated if `variants == true`
 
-Default configuration:
+Default setup:
 
 ```lua
 {
